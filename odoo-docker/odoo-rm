@@ -1,0 +1,17 @@
+#!/bin/bash
+SCRIPT=`realpath $0`;
+SCRIPTPATH=`dirname $SCRIPT`;
+PROJECT=$1;
+set -e;
+cd $SCRIPTPATH;
+if [ ! -d $HOME/dockers/$PROJECT ]; then
+    echo "Project '$PROJECT' does not exists";
+    exit 1;
+fi
+read -p "Are you sure? [y/n]";
+if [[ $REPLY =~ ^[Yy]$ ]]; then
+    ./odoo-down $PROJECT;
+    docker volume rm $PROJECT"_web-data";
+    docker volume rm $PROJECT"_db-data";
+    rm -rf $HOME/dockers/$PROJECT;
+fi

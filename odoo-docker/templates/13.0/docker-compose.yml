@@ -1,0 +1,42 @@
+version: '3.3'
+services:
+  web:
+    image: odoo:13.0
+    restart: unless-stopped
+    hostname: {project}
+    depends_on:
+      - db
+    volumes:
+      - web-data:/var/lib/odoo
+      - ./config:/etc/odoo
+      - ./addons:/mnt/extra-addons
+    environment:
+      - VIRTUAL_HOST={project}.homebrewsoft.dev
+      - VIRTUAL_PORT=8069
+      - LETSENCRYPT_HOST={project}.homebrewsoft.dev
+      - LETSENCRYPT_EMAIL=moisalejandro@gmail.com
+    networks:
+      - nginx-proxy
+      - internal
+  db:
+    image: postgres:11.5
+    hostname: {project}_db
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_PASSWORD=odoo
+      - POSTGRES_USER=odoo
+      - PGDATA=/var/lib/postgresql/data/pgdata
+    volumes:
+      - db-data:/var/lib/postgresql/data/pgdata
+    networks:
+      - internal
+
+volumes:
+  web-data:
+  db-data:
+
+networks:
+  nginx-proxy:
+    external: true
+  internal:
+    external: false

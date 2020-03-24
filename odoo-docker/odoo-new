@@ -1,0 +1,19 @@
+#!/bin/bash
+SCRIPT=`realpath $0`;
+SCRIPTPATH=`dirname $SCRIPT`;
+if [ $# != 2 ]; then
+    echo "USAGE: $0 PROJECT VERSION";
+    exit 1;
+fi
+PROJECT=$1;
+VERSION=$2;
+# TODO REPO_URL=$3
+set -e
+if [ -d $HOME/dockers/$PROJECT ]; then
+    echo "Project '$PROJECT' already exists";
+    exit 1;
+fi
+cp -r $SCRIPTPATH/templates/$VERSION $HOME/dockers/$PROJECT;
+cd $HOME/dockers/$PROJECT
+find . -type f -exec sed -i "s/{project}/$PROJECT/g" {} \;
+$SCRIPTPATH/odoo-up $PROJECT;

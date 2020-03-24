@@ -1,0 +1,5 @@
+#!/bin/bash
+PROJECT=$1;
+set -e;
+docker stop $PROJECT"_web_1";
+docker stop $PROJECT"_db_1";

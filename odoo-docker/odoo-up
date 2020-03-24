@@ -1,0 +1,5 @@
+#!/bin/bash
+PROJECT=$1;
+set -e;
+docker-compose -f "$HOME/dockers/$PROJECT/docker-compose.yml" up -d --build;
+docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' $PROJECT"_web_1";

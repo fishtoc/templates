@@ -1,0 +1,4 @@
+#!/bin/bash
+PROJECT=$1;
+set -e;
+docker-compose -f "$HOME/dockers/$PROJECT/docker-compose.yml" down;
