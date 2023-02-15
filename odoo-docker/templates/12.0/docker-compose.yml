@@ -11,9 +11,9 @@ services:
       - ./config:/etc/odoo
       - ./addons:/mnt/extra-addons
     environment:
-      - VIRTUAL_HOST={project}.otif100.com
+      - VIRTUAL_HOST={project}.fillrate100.com
       - VIRTUAL_PORT=8069
-      - LETSENCRYPT_HOST={project}.otif100.com
+      - LETSENCRYPT_HOST={project}.fillrate100.com
       - LETSENCRYPT_EMAIL=mbrtoc@gmail.com
     networks:
       - nginx-proxy
