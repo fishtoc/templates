@@ -14,7 +14,7 @@ services:
       - VIRTUAL_HOST={project}.fillrate100.com
       - VIRTUAL_PORT=8069
       - LETSENCRYPT_HOST={project}.fillrate100.com
-      - LETSENCRYPT_EMAIL=mbrtoc@gmail.com
+      - LETSENCRYPT_EMAIL=admin@goldfish.cl
     networks:
       - nginx-proxy
       - internal
