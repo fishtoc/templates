@@ -2,7 +2,7 @@ version: '3.3'
 services:
   web:
     image: odoo:12.0
-    restart: unless-stopped
+    restart: always
     hostname: {project}
     depends_on:
       - db
@@ -11,15 +11,16 @@ services:
       - ./config:/etc/odoo
       - ./addons:/mnt/extra-addons
     environment:
-      - VIRTUAL_HOST={project}.fillrate100.com
+      - VIRTUAL_HOST={project}.localhost
       - VIRTUAL_PORT=8069
-      - LETSENCRYPT_HOST={project}.fillrate100.com
-      - LETSENCRYPT_EMAIL=admin@goldfish.cl
+      - LETSENCRYPT_HOST={project}.localhost
+      - LETSENCRYPT_EMAIL=mbrtoc@gmail.com
     networks:
       - nginx-proxy
       - internal
   db:
     image: postgres:11.5
+    restart: always
     hostname: {project}_db
     environment:
       - POSTGRES_DB=postgres

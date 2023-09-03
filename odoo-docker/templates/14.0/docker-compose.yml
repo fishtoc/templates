@@ -1,8 +1,8 @@
 version: '3.3'
 services:
   web:
-    image: odoo:13.0
-    restart: always
+    image: odoo:14.0
+    restart: unless-stopped
     hostname: {project}
     depends_on:
       - db
@@ -20,7 +20,6 @@ services:
       - internal
   db:
     image: postgres:11.5
-    restart: always
     hostname: {project}_db
     environment:
       - POSTGRES_DB=postgres

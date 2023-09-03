@@ -1,8 +1,8 @@
 version: '3.3'
 services:
   web:
-    image: odoo:13.0
-    restart: always
+    image: odoo:16.0
+    restart: unless-stopped
     hostname: {project}
     depends_on:
       - db
@@ -19,8 +19,7 @@ services:
       - nginx-proxy
       - internal
   db:
-    image: postgres:11.5
-    restart: always
+    image: postgres:13
     hostname: {project}_db
     environment:
       - POSTGRES_DB=postgres
